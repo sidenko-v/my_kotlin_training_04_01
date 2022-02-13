@@ -16,8 +16,8 @@ class MainKtTest {
 
     @Test
     fun commissionCalculationForMastercardMaestro_shouldBeNoCommission() {
-        val amountInKopecks = 1000000
-        val amountPreTransferInKopecks = 7400000
+        val amountInKopecks = 1_000_000
+        val amountPreTransferInKopecks = 7400_000
 
         val result = commissionCalculationForMastercardMaestro(amountInKopecks, amountPreTransferInKopecks)
 
@@ -57,7 +57,7 @@ class MainKtTest {
 
     @Test
     fun commissionCalculation_shouldBeCommissionForVkPay() {
-        val paymentType = "Vk Pay"
+        val paymentType = PAYMENT_TYPE_VK
         val amountPreTransferInKopecks = 20_000_000
         val amountInKopecks = 20_000_000
 
@@ -68,7 +68,7 @@ class MainKtTest {
 
     @Test
     fun commissionCalculation_shouldBeCommissionForMastercardMaestro() {
-        val paymentType = "Mastercard и Maestro"
+        val paymentType = PAYMENT_TYPE_MASTERCARD_MAESTRO
         val amountPreTransferInKopecks = 20_000_000
         val amountInKopecks = 20_000_000
 
@@ -79,12 +79,23 @@ class MainKtTest {
 
     @Test
     fun commissionCalculation_shouldBeCommissionForVisaMir() {
-        val paymentType = "Visa и Мир"
+        val paymentType = PAYMENT_TYPE_VISA_MIR
         val amountPreTransferInKopecks = 20_000_000
         val amountInKopecks = 20_000_000
 
         val result = commissionCalculation(paymentType, amountPreTransferInKopecks, amountInKopecks)
 
         assertEquals(150_000, result)
+    }
+
+    @Test
+    fun commissionCalculation_shouldBeNoCommissionWithoutPayMethod() {
+        val paymentType = ""
+        val amountPreTransferInKopecks = 20_000_000
+        val amountInKopecks = 20_000_000
+
+        val result = commissionCalculation(paymentType, amountPreTransferInKopecks, amountInKopecks)
+
+        assertEquals(0, result)
     }
 }

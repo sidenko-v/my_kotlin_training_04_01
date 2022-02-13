@@ -4,12 +4,10 @@ const val PAYMENT_TYPE_VISA_MIR = "Visa и Мир"
 
 fun main() {
 
-    val paymentType = PAYMENT_TYPE_VISA_MIR
+    val paymentType = PAYMENT_TYPE_VK
     val amountPreTransferInRub = 10000F
     val amountInRub = 40000F
     val commission = commissionCalculation(paymentType, rubToKopecks(amountPreTransferInRub), rubToKopecks(amountInRub))
-    println(commission)
-
 }
 
 fun rubToKopecks(amountInRub: Float): Int {
