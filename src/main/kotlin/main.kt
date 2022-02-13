@@ -49,7 +49,6 @@ fun commissionCalculation(paymentType: String, аmountPreTransferInKopecks: Int,
     return commission
 }
 
-
 fun commissionCalculationForMastercardMaestro(amountInKopecks: Int, аmountPreTransferInKopecks: Int): Int {
 
     var commission: Int = 0
