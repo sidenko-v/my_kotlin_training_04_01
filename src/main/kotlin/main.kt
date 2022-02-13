@@ -1,21 +1,3 @@
-import kotlin.math.min
-
-//В прошлый раз мы рассматривали упрощённый вариант вычисления комиссии. Пришла пора сделать нормальный.
-//Q: Почему?
-
-//A: Потому что так дешевле пользователям. За MasterCard и Maestro вообще не нужно платить пока не превысили лимит (замечание от 300 убираем), а для VK Pay всегда бесплатно:
-//
-//
-//https://github.com/netology-code/kt-homeworks/blob/master/03_control/pic/vk-commission.png
-//Напишите алгоритм расчёта в виде функции, передавая в функцию:
-//
-//Тип карты/счёта (по умолчанию - Vk Pay).
-//Сумму предыдущих переводов в этом месяце (по умолчанию - 0).
-//Сумму совершаемого перевода.
-//Функция по-прежнему должна возвращать комиссию в копейках.
-//
-//Итог: у вас должен быть репозиторий на GitHub, в котором будет ваш Gradle-проект.
-
 val paymentTypeVK = "Vk Pay"
 val paymentTypeMastercardMaestro = "Mastercard и Maestro"
 val paymentTypeVisaMir = "Visa и Мир"
@@ -23,9 +5,9 @@ val paymentTypeVisaMir = "Visa и Мир"
 fun main() {
 
     val paymentType = paymentTypeVisaMir
-    val аmountPreTransferInRub = 10000F
+    val amountPreTransferInRub = 10000F
     val amountInRub = 40000F
-    val commission = commissionCalculation(paymentType, rubToKopecks(аmountPreTransferInRub), rubToKopecks(amountInRub))
+    val commission = commissionCalculation(paymentType, rubToKopecks(amountPreTransferInRub), rubToKopecks(amountInRub))
     println(commission)
 
 }
@@ -35,21 +17,21 @@ fun rubToKopecks(amountInRub: Float): Int {
     return amountInKopecks
 }
 
-fun commissionCalculation(paymentType: String, аmountPreTransferInKopecks: Int, amountInKopecks: Int): Int {
+fun commissionCalculation(paymentType: String, amountPreTransferInKopecks: Int, amountInKopecks: Int): Int {
 
     var commission: Int = 0
 
     when (paymentType) {
         paymentTypeVK -> commission = 0
         paymentTypeMastercardMaestro -> commission =
-            commissionCalculationForMastercardMaestro(amountInKopecks, аmountPreTransferInKopecks)
+            commissionCalculationForMastercardMaestro(amountInKopecks, amountPreTransferInKopecks)
         paymentTypeVisaMir -> commission = commissionCalculationForVisaMir(amountInKopecks)
     }
 
     return commission
 }
 
-fun commissionCalculationForMastercardMaestro(amountInKopecks: Int, аmountPreTransferInKopecks: Int): Int {
+fun commissionCalculationForMastercardMaestro(amountInKopecks: Int, amountPreTransferInKopecks: Int): Int {
 
     var commission: Int = 0
 
@@ -57,7 +39,7 @@ fun commissionCalculationForMastercardMaestro(amountInKopecks: Int, аmountPreTr
     val comPercentage = 0.6F
     val comPart = comPercentage / 100
 
-    when (аmountPreTransferInKopecks) {
+    when (amountPreTransferInKopecks) {
         in 0..maxPreAmount -> commission = 0
         else -> commission = (amountInKopecks * comPart + rubToKopecks(20F)).toInt()
     }
