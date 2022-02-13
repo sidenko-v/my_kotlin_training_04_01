@@ -1,10 +1,10 @@
-val paymentTypeVK = "Vk Pay"
-val paymentTypeMastercardMaestro = "Mastercard и Maestro"
-val paymentTypeVisaMir = "Visa и Мир"
+const val PAYMENT_TYPE_VK = "Vk Pay"
+const val PAYMENT_TYPE_MASTERCARD_MAESTRO = "Mastercard и Maestro"
+const val PAYEMENT_TYPE_VISA_MIR = "Visa и Мир"
 
 fun main() {
 
-    val paymentType = paymentTypeVisaMir
+    val paymentType = PAYEMENT_TYPE_VISA_MIR
     val amountPreTransferInRub = 10000F
     val amountInRub = 40000F
     val commission = commissionCalculation(paymentType, rubToKopecks(amountPreTransferInRub), rubToKopecks(amountInRub))
@@ -22,10 +22,10 @@ fun commissionCalculation(paymentType: String, amountPreTransferInKopecks: Int, 
     var commission: Int = 0
 
     when (paymentType) {
-        paymentTypeVK -> commission = 0
-        paymentTypeMastercardMaestro -> commission =
+        PAYMENT_TYPE_VK -> commission = 0
+        PAYMENT_TYPE_MASTERCARD_MAESTRO -> commission =
             commissionCalculationForMastercardMaestro(amountInKopecks, amountPreTransferInKopecks)
-        paymentTypeVisaMir -> commission = commissionCalculationForVisaMir(amountInKopecks)
+        PAYEMENT_TYPE_VISA_MIR -> commission = commissionCalculationForVisaMir(amountInKopecks)
     }
 
     return commission
