@@ -96,6 +96,6 @@ class MainKtTest {
 
         val result = commissionCalculation(paymentType, amountPreTransferInKopecks, amountInKopecks)
 
-        assertEquals(0, result)
+        assertEquals(1, result)
     }
 }
